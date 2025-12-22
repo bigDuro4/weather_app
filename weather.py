@@ -15,8 +15,6 @@ if not api_key:
     print("API key not found. Check your .env file.")
     exit()
 
-user_input = input("Enter your city: ")
-
 url = "https://api.openweathermap.org/data/2.5/weather"
 params = {
     "q": user_input,
