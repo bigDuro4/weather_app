@@ -1,14 +1,34 @@
+from dotenv import load_dotenv
 import requests
+import os
 
-api_key= 'd1a2f55240545f1ebb628d31445fff77'
+load_dotenv()
 
-user_input = input ("Enter Your City!:")
+api_key = os.getenv("OPENWEATHER_API_KEY")
 
-weather_data = requests.get(
-    f"https://api.openweathermap.org/data/2.5/weather?q={user_input}&units=imperial&APPID={api_key}")
+if not api_key:
+    print("API key not found. Check your .env file.")
+    exit()
 
-weather= weather_data.json()['weather'][0]['main']
-temp= weather_data.json()['main']['temp']
+user_input = input("Enter your city: ")
+
+url = "https://api.openweathermap.org/data/2.5/weather"
+params = {
+    "q": user_input,
+    "units": "imperial",
+    "appid": api_key
+}
+
+weather_data = requests.get(url, params=params)
+data = weather_data.json()
+
+# Always inspect failures
+if weather_data.status_code != 200:
+    print("Error:", data.get("message", "Unknown error"))
+    exit()
+
+weather = data["weather"][0]["main"]
+temp = data["main"]["temp"]
 
 print(f"The weather shows {weather}")
-print(f"The temperature is {temp}")
+print(f"The temperature is {temp}°F")
