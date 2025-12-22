@@ -17,7 +17,7 @@ if not api_key:
 
 url = "https://api.openweathermap.org/data/2.5/weather"
 params = {
-    "q": user_input,
+    "q": city,
     "units": "imperial",
     "appid": api_key
 }
