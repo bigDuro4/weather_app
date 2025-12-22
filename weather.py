@@ -4,6 +4,11 @@ import os
 
 load_dotenv()
 
+city = os.getenv("CITY")
+
+if not city:
+    city = input("Enter your city: ")
+
 api_key = os.getenv("OPENWEATHER_API_KEY")
 
 if not api_key:
