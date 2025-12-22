@@ -2,7 +2,8 @@ name: Python Weather App
 
 on:
   push:
-    branches: [ "main" ]
+    branches:
+      - main
 
 jobs:
   run-app:
@@ -22,10 +23,9 @@ jobs:
           python -m pip install --upgrade pip
           pip install requests python-dotenv
 
-       - name: Run app
-         env:
+      - name: Run app
+        env:
           OPENWEATHER_API_KEY: ${{ secrets.OPENWEATHER_API_KEY }}
-         CITY: London
-          run: |
-            python weather.py
-
+          CITY: London
+        run: |
+          python weather.py
