@@ -26,4 +26,6 @@ jobs:
 
       - name: Run app or tests
         run: |
-          python your_file.py
+          python weather.py
+
+          
