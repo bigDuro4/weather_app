@@ -22,8 +22,10 @@ jobs:
           python -m pip install --upgrade pip
           pip install requests python-dotenv
 
-      - name: Run app
-        env:
+       - name: Run app
+         env:
           OPENWEATHER_API_KEY: ${{ secrets.OPENWEATHER_API_KEY }}
-        run: |
-          python weather.py
+         CITY: London
+          run: |
+            python weather.py
+
