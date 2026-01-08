@@ -10,9 +10,9 @@ A simple PyQt5 desktop weather application that lets users enter a city and view
 
 Data is fetched from the OpenWeather API.
 
-## Demo / Screenshot
+## Demo 
+Go to Openweather.org> Sign in> My Api Keys> Generate
 
-(Add screenshot here)
 
 ## Prerequisites
 
