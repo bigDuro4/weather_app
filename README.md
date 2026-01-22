@@ -86,3 +86,5 @@ weather_app/
   tests/
     test_weather.py
 ```
+### What to Improve
+- Probably just using zipcodes to bypass spelling mistakes
