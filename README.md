@@ -27,8 +27,17 @@ Go to Openweather.org> Sign in> My Api Keys> Generate
 git clone https://github.com/bigDuro4/weather_app.git
 cd weather_app
 ```
+### 2) Retreive API Key
+- Go to openweathermap.org
+  <img width="2164" height="562" alt="image" src="https://github.com/user-attachments/assets/ec450b05-00e0-4fd7-b5e4-2056f3f3e810" />
+- Create an account
+- Once you sign in go to API Keys and create
+  <img width="2171" height="678" alt="image" src="https://github.com/user-attachments/assets/eac173da-1278-475c-a5d6-3729198e1af7" />
+- You can then use this in your dotenv file 
 
-### 2) Create & activate a virtual environment
+
+
+### 3) Create & activate a virtual environment
 
 ```bash
 python -m venv .venv
