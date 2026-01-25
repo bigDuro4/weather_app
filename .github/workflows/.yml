@@ -1,6 +1,6 @@
 name: Python Weather App
 
-on:
+on: []
   push:
     branches: [ "main" ]
   pull_request:
