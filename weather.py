@@ -113,11 +113,9 @@ class WeatherApp(QWidget):
 
     
     def  display_weather(self, data) :
-        temperature_k= data["main"]["temp"]
-        temperature_c= temperature_k-273.15
-        temperature_f= (temperature_c*9/5)+32
-        weather_description= data['weather'][0]['description']
-        weather_id= data['weather'][0]['id']
+        temperature_k = data["main"]["temp"]
+        temperature_f = self.kelvin_to_fahrenheit(temperature_k)
+
         
         self.temperature_label.setText(f"{temperature_f:.0f}")
         self.emoji_label.setText(self.get_weather_emoji(weather_id))
