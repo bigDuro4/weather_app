@@ -106,6 +106,11 @@ class WeatherApp(QWidget):
 
     def display_error(self, message):
         self.temperature_label.setText(message)
+   
+    def kelvin_to_fahrenheit(self, temp_k):
+        temp_c = temp_k - 273.15
+        return (temp_c * 9/5) + 32
+
     
     def  display_weather(self, data) :
         temperature_k= data["main"]["temp"]
