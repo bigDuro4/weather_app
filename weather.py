@@ -77,47 +77,50 @@ class WeatherApp(QWidget):
 
     
     def get_weather(self):
-        api_key= os.getenv("OPENWEATHER_API_KEY")
+        api_key = os.getenv("OPENWEATHER_API_KEY")
+        print("RAW ENV:", os.environ.get("OPENWEATHER_API_KEY"))
+        print("DOTENV:", api_key)
+        city = self.city_input.text().strip()
 
-        if not api_key:
-            self.display_error("Missing OPENWEATHER_API_KEY")
+
+        if not city:
+            self.display_error("Please enter a city name.")
             return
 
-        city= self.city_input.text()
-        url= f"https://api.openweathermap.org/data/2.5/weather?q={city}&appid={api_key}"
+        url =(
+                f"https://api.openweathermap.org/data/2.5/weather"
+                f"?q={city}&units=imperial&appid={api_key}"
+            )    
 
         try:
-            response= requests.get(url)
+            response = requests.get(url, timeout=10)
             response.raise_for_status()
-            data= response.json()
-            if int(data["cod"]) == 200:
-                self.display_weather(data)
+            data = response.json()
+            self.display_weather(data)
+
         except requests.exceptions.HTTPError:
-            self.display_error(response.status_code)
+            self.display_error("City not found. Or the API Key is Invalid")
+
         except requests.exceptions.ConnectionError:
-            self.display_error("Connection Error \n Check your internet")
+            self.display_error("Connection error. Check internet.")
+
         except requests.exceptions.Timeout:
-            self.display_error("The request timed out")
-        except requests.exceptions.TooManyRedirects:
-            self.display_error("Check the Url \n too many redirects")
-        except requests.exceptions.RequestException as req_error:
-            self.display_error("Request error")
+            self.display_error("Request timed out.")
+
+        except requests.exceptions.RequestException:
+            self.display_error("Unexpected network error.")
+
         
 
     def display_error(self, message):
         self.temperature_label.setText(message)
-   
-    def kelvin_to_fahrenheit(self, temp_k):
-        temp_c = temp_k - 273.15
-        return (temp_c * 9/5) + 32
-
     
     def  display_weather(self, data) :
-        temperature_k = data["main"]["temp"]
-        temperature_f = self.kelvin_to_fahrenheit(temperature_k)
-
+        temperature= data["main"]["temp"]
+        weather_description= data['weather'][0]['description']
+        weather_id= data['weather'][0]['id']
         
-        self.temperature_label.setText(f"{temperature_f:.0f}")
+        self.temperature_label.setText(f"{temperature:.0f}")
         self.emoji_label.setText(self.get_weather_emoji(weather_id))
         self.description_label.setText(f"{weather_description}")
 
