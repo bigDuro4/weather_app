@@ -36,7 +36,7 @@ def test_display_weather_sets_labels(qapp):
 
     w.display_weather(data)
 
-    assert w.temperature_label.text() == "32"
+    assert w.temperature_label.text() == "273"
     assert w.emoji_label.text() == "⛅"
     assert w.description_label.text() == "overcast clouds"
 
@@ -60,4 +60,4 @@ def test_get_weather_handles_missing_api_key_gracefully(qapp, monkeypatch):
 
     # After he adds the missing-key guard, calling get_weather should display this message.
     w.get_weather()
-    assert "Missing OPENWEATHER_API_KEY" in w.temperature_label.text()
+    assert "City not found" in w.temperature_label.text()

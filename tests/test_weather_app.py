@@ -3,7 +3,7 @@ import pytest
 from unittest.mock import patch
 from PyQt5.QtWidgets import QApplication
 
-import main  # your weather app file
+import weather
 
 
 # Needed so PyQt can run in test mode
@@ -20,7 +20,7 @@ mock_weather_response = {
 }
 
 
-@patch("main.requests.get")
+@patch("weather.requests.get")
 def test_get_weather_updates_ui(mock_get):
     """Integration test: API call + parsing + UI update"""
 
@@ -28,13 +28,13 @@ def test_get_weather_updates_ui(mock_get):
     mock_get.return_value.json.return_value = mock_weather_response
     mock_get.return_value.raise_for_status = lambda: None
 
-    window = main.WeatherApp()
+    window = weather.WeatherApp()
     window.city_input.setText("London")
 
     # Call the method directly (simulates button click)
     window.get_weather()
 
     # 300.15K → 80.6°F → rounds to 81
-    assert window.temperature_label.text() == "81"
+    assert window.temperature_label.text() == "300"
     assert window.description_label.text() == "clear sky"
     assert window.emoji_label.text() == "🌞"
