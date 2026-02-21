@@ -148,9 +148,7 @@ class WeatherApp(QWidget):
         else:
             return "❓"
 
-
-
-
+# Main section of code
 if __name__== "__main__":
     app = QApplication(sys.argv)
     weather_app= WeatherApp()
